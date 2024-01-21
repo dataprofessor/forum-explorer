@@ -54,7 +54,7 @@ colors = [
 def my_theme():
   return {
     'config': {
-      'view': {'continuousHeight': 400, 'continuousWidth': 400},  # from the default theme
+      'view': {'continuousHeight': 400},
       'range': {'category': colors}
     }
   }
@@ -71,6 +71,6 @@ tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
-st.altair_chart(tsne_plot)
+st.altair_chart(tsne_plot, use_container_width=True)
 
 
