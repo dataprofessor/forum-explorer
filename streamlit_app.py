@@ -7,7 +7,6 @@ import torch
 st.title('🎈 Streamlit Forum Explorer')
 
 # Load data
-
 @st.cache_data
 def load_df():
   return pd.read_csv('data/streamlit_forum_16Jan2024.csv')
