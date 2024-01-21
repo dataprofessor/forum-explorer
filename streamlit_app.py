@@ -8,23 +8,23 @@ st.title('🎈 Streamlit Forum Explorer')
 
 # Load data
 
-#@st.cache_data
+@st.cache_data
 def load_df():
   return pd.read_csv('data/streamlit_forum_16Jan2024.csv')
 
-#@st.cache_data
+@st.cache_data
 def load_embeddings():
   return torch.load('data/corpus_embeddings_16Jan2024.pt')
 
-#@st.cache_data
+@st.cache_data
 def load_cluster_topics():
   return pd.read_csv('data/cluster_topics.csv', header=None)
 
-#@st.cache_data
+@st.cache_data
 def load_tsne_2d_vectors():
   return np.load('data/tsne_2d_vectors.npy')
 
-#@st.cache_data
+@st.cache_data
 def load_tsne_posts_vectors_clusters():
   return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
 
@@ -35,7 +35,7 @@ tsne_2d_vectors = load_tsne_2d_vectors()
 df_cluster = load_tsne_posts_vectors_clusters()
 
 
-# Chart
+# Chart rendering
 alt.data_transformers.disable_max_rows()
 
 colors = [
@@ -70,6 +70,8 @@ tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 opacity=alt.value(0.3),
                 tooltip=['title', 'cluster']
             )
+
+
 
 st.altair_chart(tsne_plot, use_container_width=True)
 
