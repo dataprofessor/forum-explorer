@@ -23,15 +23,13 @@ def load_cluster_topics():
 def load_tsne_2d_vectors():
   return np.load('data/tsne_2d_vectors.npy')
 
+#@st.cache_data
+def load_tsne_posts_vectors_clusters():
+  return pd.read_csv('tsne_posts_vectors_clusters.csv')
+
 df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
+df_cluster = load_tsne_posts_vectors_clusters()
 
-df
-
-corpus_embeddings
-
-cluster_topics
-
-tsne_2d_vectors
