@@ -70,6 +70,6 @@ tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
-# tsne_plot
+st.altair_chart(tsne_plot)
 
 
