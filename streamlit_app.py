@@ -15,7 +15,7 @@ def load_embeddings():
 
 #@st.cache_data
 def load_cluster_topics():
-  return pd.read_csv('data/cluster_topics.csv', header=False)
+  return pd.read_csv('data/cluster_topics.csv', header=None)
 
 #@st.cache_data
 def load_tsne_2d_vectors():
