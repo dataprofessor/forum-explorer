@@ -25,7 +25,7 @@ def load_tsne_2d_vectors():
 
 #@st.cache_data
 def load_tsne_posts_vectors_clusters():
-  return pd.read_csv('tsne_posts_vectors_clusters.csv')
+  return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
 
 df = load_df()
 corpus_embeddings = load_embeddings()
