@@ -5,6 +5,8 @@ import torch
 
 st.title('🎈 Streamlit Forum Explorer')
 
+# Load data
+
 #@st.cache_data
 def load_df():
   return pd.read_csv('data/streamlit_forum_16Jan2024.csv')
@@ -25,3 +27,11 @@ df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
+
+df
+
+corpus_embeddings
+
+cluster_topics
+
+tsne_2d_vectors
