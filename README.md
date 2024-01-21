@@ -1,9 +1,6 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# 🎈 Streamlit Forum Explorer
 
-Description of the app ...
+This app scrapes all forum posts in the [`🎈 Using Streamlit`](https://discuss.streamlit.io/c/questions/5) section of the Streamlit forum. Users can ask a question and the app will retrireve nearest neighbor posts.
 
 ## Demo App
 
