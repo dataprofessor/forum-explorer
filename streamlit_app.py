@@ -39,7 +39,6 @@ st.markdown('#### Query')
 input_query = st.text_input('Ask a question about Streamlit')
 st.warning(f'**Query:** {input_query}', icon='❓')
 
-df.id
 
 # Generate embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
