@@ -58,6 +58,7 @@ if input_query is not None:
 
 ##########
 # Chart rendering
+st.markdown('#### Topic clusters')
 alt.data_transformers.disable_max_rows()
 
 colors = [
