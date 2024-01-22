@@ -83,3 +83,8 @@ query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 top_k = min(5, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
+
+if input_query is not None:
+  st.write(input_query)
+  for score, idx in zip(top_results[0], top_results[1]):
+    st.write(corpus[idx], "(Score: {:.4f})".format(score))
