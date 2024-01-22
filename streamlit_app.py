@@ -76,7 +76,6 @@ tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
 st.altair_chart(tsne_plot, use_container_width=True)
 
 # Generate embeddings for query
-
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
 query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 
