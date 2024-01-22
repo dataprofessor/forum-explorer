@@ -54,7 +54,7 @@ top_results = torch.topk(cos_scores, k=top_k)
 
 if input_query != '':
   st.markdown('#### Results')
-  st.warning(f'**Nearest neighbors for:** {input_query}', icon='📍')
+  st.warning(f'**{k_neighbors} nearest neighbors for:** {input_query}', icon='📍')
 
   for score, idx in zip(top_results[0], top_results[1]):
     # st.write(corpus[idx], "(Score: {:.4f})".format(score))
