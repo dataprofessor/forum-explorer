@@ -34,6 +34,8 @@ tsne_2d_vectors = load_tsne_2d_vectors()
 df_cluster = load_tsne_posts_vectors_clusters()
 
 
+input_query = st.text_input('Ask a question about Streamlit?')
+
 # Chart rendering
 alt.data_transformers.disable_max_rows()
 
