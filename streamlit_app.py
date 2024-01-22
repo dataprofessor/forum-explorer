@@ -35,7 +35,7 @@ tsne_2d_vectors = load_tsne_2d_vectors()
 df_cluster = load_tsne_posts_vectors_clusters()
 
 # Parameters
-with st.sidebar():
+with st.sidebar:
   k_neighbors = st.slider('How many nearest neighbors?', 1, 100, 5)
 
 # Query
