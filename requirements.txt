@@ -4,4 +4,5 @@ torch==2.1.2
 numpy==1.26.3
 pandas==2.2.0
 scikit-learn==1.4.0
+openTSNE==1.0.1
 sentence-transformers==2.2.2
