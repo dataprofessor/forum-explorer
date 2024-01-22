@@ -47,8 +47,6 @@ embedder = SentenceTransformer('all-MiniLM-L6-v2')
 query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 corpus = list(df.title)
 
-query_embedding
-
 # Find the top scores
 top_k = min(k_neighbors, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
