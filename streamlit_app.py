@@ -86,5 +86,8 @@ top_results = torch.topk(cos_scores, k=top_k)
 
 if input_query is not None:
   st.write(input_query)
+
+  corpus = list(df.title)
+  
   for score, idx in zip(top_results[0], top_results[1]):
     st.write(corpus[idx], "(Score: {:.4f})".format(score))
