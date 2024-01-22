@@ -40,7 +40,7 @@ with st.sidebar:
 
 # Query
 st.markdown('#### Query')
-input_query = st.text_input('Ask a question about Streamlit')
+input_query = st.text_input('Ask a question about Streamlit', placeholder='Enter your question here ...')
 
 # Generate embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
