@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
 from sklearn.manifold import TSNE
+from openTSNE import TSNE
 import torch
 
 st.title('🎈 Streamlit Forum Explorer')
@@ -67,8 +68,12 @@ if input_query != '':
   # tSNE cluster
   concatenated_embeddings = torch.cat((corpus_embeddings, query_embedding.unsqueeze(0)), dim=0)
   
-  tsne_query = TSNE(n_components=2, perplexity=15, random_state=42, init="random", learning_rate=5)
+  #tsne_query = TSNE(n_components=2, perplexity=15, random_state=42, init="random", learning_rate=5)
+  #tsne_2d_vectors_query = tsne_query.fit_transform(concatenated_embeddings)
+
+  tsne_query = TSNE(n_components=2, perplexity=15, metric="euclidean", learning_rate=10, random_state=42)
   tsne_2d_vectors_query = tsne_query.fit_transform(concatenated_embeddings)
+  
   x = [x for x, y in tsne_2d_vectors_query]
   y = [y for x, y in tsne_2d_vectors_query]
   
