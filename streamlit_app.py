@@ -126,4 +126,4 @@ tsne_query = alt.Chart(df_cluster_.iloc[-1:]).mark_square(size=60, fill='white',
                 tooltip=['title', 'cluster']
             )
 
-st.altair_chart(tsne_plot + tsne_query, use_container_width=True)
+st.altair_chart(alt.layer(tsne_plot,tsne_query), use_container_width=True)
