@@ -63,6 +63,17 @@ if input_query != '':
 
 ##########
 # Chart rendering
+df_title_query = pd.concat([df.title, pd.Series(query).set_axis(pd.Index([len(df)]))], axis=0) 
+df_cluster_query = pd.concat([df.cluster, pd.Series(len(df.cluster.unique())).set_axis(pd.Index([len(df)]))], axis=0)
+
+df_cluster_ = pd.DataFrame({
+              'title': df_title_query,
+              'x': x,
+              'y': y,
+              'cluster': df_cluster_query
+             })
+
+
 st.markdown('#### Topic clusters')
 alt.data_transformers.disable_max_rows()
 
@@ -89,7 +100,7 @@ def my_theme():
 alt.themes.register('my_theme', my_theme)
 alt.themes.enable('my_theme')
 
-tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
+tsne_plot = alt.Chart(df_cluster_.iloc[:-1]).mark_circle(size=60).encode(
                 x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 # x='x:Q',
@@ -99,4 +110,11 @@ tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
-st.altair_chart(tsne_plot, use_container_width=True)
+tsne_query = alt.Chart(df_cluster_.iloc[-1:]).mark_square(size=60, fill='white', stroke='black').encode(
+                x='x',
+                y='y',
+                opacity=alt.value(1),
+                tooltip=['title', 'cluster']
+            )
+
+st.altair_chart(tsne_plot + tsne_query, use_container_width=True)
