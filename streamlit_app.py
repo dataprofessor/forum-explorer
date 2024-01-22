@@ -49,6 +49,7 @@ cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
 
 if input_query is not None:
+  st.markdown('#### Results')
   st.warning(f'**Query:** {input_query}', icon='❓')
 
   for score, idx in zip(top_results[0], top_results[1]):
