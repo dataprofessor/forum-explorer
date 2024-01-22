@@ -58,8 +58,8 @@ if input_query is not None:
 
   for score, idx in zip(top_results[0], top_results[1]):
     # st.write(corpus[idx], "(Score: {:.4f})".format(score))
-    post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
-    st.write(f"- [{corpus[idx]}]({post_link})", "(Score: {:.4f})".format(score))
+    post_link = "https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
+    st.write("- [{corpus[idx]}]({post_link})", "(Score: {:.4f})".format(score))
     #st.write(f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}")
     
 
