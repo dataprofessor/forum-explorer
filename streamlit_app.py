@@ -34,9 +34,12 @@ cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
 df_cluster = load_tsne_posts_vectors_clusters()
 
+# Query
 st.markdown('#### Query')
 input_query = st.text_input('Ask a question about Streamlit')
 st.warning(f'**Query:** {input_query}', icon='❓')
+
+df
 
 # Generate embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
