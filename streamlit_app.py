@@ -37,8 +37,6 @@ df_cluster = load_tsne_posts_vectors_clusters()
 # Query
 st.markdown('#### Query')
 input_query = st.text_input('Ask a question about Streamlit')
-st.warning(f'**Query:** {input_query}', icon='❓')
-
 
 # Generate embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
@@ -52,6 +50,7 @@ top_results = torch.topk(cos_scores, k=top_k)
 
 if input_query is not None:
   st.markdown('#### Results')
+  st.warning(f'**Nearest neighbors for:** {input_query}', icon='📍')
 
   for score, idx in zip(top_results[0], top_results[1]):
     # st.write(corpus[idx], "(Score: {:.4f})".format(score))
