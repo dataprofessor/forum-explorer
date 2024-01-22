@@ -73,7 +73,7 @@ x = [x for x, y in tsne_2d_vectors_query]
 y = [y for x, y in tsne_2d_vectors_query]
 
 # Chart rendering
-df_title_query = pd.concat([df.title, pd.Series(input_query).set_axis(pd.Index([len(df)]))], axis=0) 
+df_title_query = pd.concat([df_cluster.title, pd.Series(input_query).set_axis(pd.Index([len(df_cluster)]))], axis=0) 
 df_cluster_query = pd.concat([df_cluster.cluster, pd.Series(len(df_cluster.cluster.unique())).set_axis(pd.Index([len(df)]))], axis=0)
 
 df_cluster_ = pd.DataFrame({
