@@ -64,67 +64,67 @@ if input_query != '':
 
 ##########
 
-# tSNE cluster
-concatenated_embeddings = torch.cat((corpus_embeddings, query_embedding.unsqueeze(0)), dim=0)
+  # tSNE cluster
+  concatenated_embeddings = torch.cat((corpus_embeddings, query_embedding.unsqueeze(0)), dim=0)
+  
+  tsne_query = TSNE(n_components=2, perplexity=15, random_state=42, init="random", learning_rate=5)
+  tsne_2d_vectors_query = tsne_query.fit_transform(concatenated_embeddings)
+  x = [x for x, y in tsne_2d_vectors_query]
+  y = [y for x, y in tsne_2d_vectors_query]
+  
+  # Chart rendering
+  df_title_query = pd.concat([df_cluster.title, pd.Series(input_query).set_axis(pd.Index([len(df_cluster)]))], axis=0) 
+  df_cluster_query = pd.concat([df_cluster.cluster, pd.Series(len(df_cluster.cluster.unique())).set_axis(pd.Index([len(df_cluster)]))], axis=0)
+  
+  df_cluster_ = pd.DataFrame({
+                'title': df_title_query,
+                'x': x,
+                'y': y,
+                'cluster': df_cluster_query
+               })
 
-tsne_query = TSNE(n_components=2, perplexity=15, random_state=42, init="random", learning_rate=5)
-tsne_2d_vectors_query = tsne_query.fit_transform(concatenated_embeddings)
-x = [x for x, y in tsne_2d_vectors_query]
-y = [y for x, y in tsne_2d_vectors_query]
-
-# Chart rendering
-df_title_query = pd.concat([df_cluster.title, pd.Series(input_query).set_axis(pd.Index([len(df_cluster)]))], axis=0) 
-df_cluster_query = pd.concat([df_cluster.cluster, pd.Series(len(df_cluster.cluster.unique())).set_axis(pd.Index([len(df_cluster)]))], axis=0)
-
-df_cluster_ = pd.DataFrame({
-              'title': df_title_query,
-              'x': x,
-              'y': y,
-              'cluster': df_cluster_query
-             })
-
-
-st.markdown('#### Topic clusters')
-alt.data_transformers.disable_max_rows()
-
-colors = [
-  '#fff100', # yellow
-  '#ff8c00', # orange
-  '#e81123', # red
-  '#ec008c', # magenta
-  '#68217a', # purple
-  '#00188f', # blue
-  '#00bcf2', # cyan
-  '#00b294', # teal
-  '#009e49', # green
-  '#bad80a' # lime
-]
-
-def my_theme():
-  return {
-    'config': {
-      'view': {'continuousHeight': 400},
-      'range': {'category': colors}
+  
+  st.markdown('#### Topic clusters')
+  alt.data_transformers.disable_max_rows()
+  
+  colors = [
+    '#fff100', # yellow
+    '#ff8c00', # orange
+    '#e81123', # red
+    '#ec008c', # magenta
+    '#68217a', # purple
+    '#00188f', # blue
+    '#00bcf2', # cyan
+    '#00b294', # teal
+    '#009e49', # green
+    '#bad80a' # lime
+  ]
+  
+  def my_theme():
+    return {
+      'config': {
+        'view': {'continuousHeight': 400},
+        'range': {'category': colors}
+      }
     }
-  }
-alt.themes.register('my_theme', my_theme)
-alt.themes.enable('my_theme')
-
-tsne_plot = alt.Chart(df_cluster_.iloc[:-1]).mark_circle(size=60).encode(
-                x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
-                y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
-                # x='x:Q',
-                # y='y:Q',
-                color='cluster:N',
-                opacity=alt.value(0.3),
-                tooltip=['title', 'cluster']
-            )
-
-tsne_query = alt.Chart(df_cluster_.iloc[-1:]).mark_square(size=60, fill='white', stroke='black').encode(
-                x='x',
-                y='y',
-                opacity=alt.value(1),
-                tooltip=['title', 'cluster']
-            )
-
-st.altair_chart(alt.layer(tsne_plot,tsne_query), use_container_width=True)
+  alt.themes.register('my_theme', my_theme)
+  alt.themes.enable('my_theme')
+  
+  tsne_plot = alt.Chart(df_cluster_.iloc[:-1]).mark_circle(size=60).encode(
+                  x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
+                  y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
+                  # x='x:Q',
+                  # y='y:Q',
+                  color='cluster:N',
+                  opacity=alt.value(0.3),
+                  tooltip=['title', 'cluster']
+              )
+  
+  tsne_query = alt.Chart(df_cluster_.iloc[-1:]).mark_square(size=60, fill='white', stroke='black').encode(
+                  x='x',
+                  y='y',
+                  opacity=alt.value(1),
+                  tooltip=['title', 'cluster']
+              )
+  
+  st.altair_chart(alt.layer(tsne_plot,tsne_query), use_container_width=True)
