@@ -55,8 +55,8 @@ if input_query is not None:
   st.markdown('#### Results')
 
   for score, idx in zip(top_results[0], top_results[1]):
-    st.markdown(f"[{corpus[idx]}](https://discuss.streamlit.io/t/{df.slug[idx]}/{df.id[idx]})", "(Score: {:.4f})".format(score))
-
+    st.markdown(corpus[idx], "(Score: {:.4f})".format(score))
+    # https://discuss.streamlit.io/t/{df.slug[idx]}/{df.id[idx]}
 
 ##########
 # Chart rendering
