@@ -62,6 +62,15 @@ if input_query != '':
     
 
 ##########
+
+# tSNE cluster
+concatenated_embeddings = torch.cat((corpus_embeddings, query_embedding.unsqueeze(0)), dim=0)
+
+tsne_query = TSNE(n_components=2, perplexity=15, random_state=42, init="random", learning_rate=200)
+tsne_2d_vectors_query = tsne_query.fit_transform(concatenated_embeddings)
+x = [x for x, y in tsne_2d_vectors_query]
+y = [y for x, y in tsne_2d_vectors_query]
+
 # Chart rendering
 df_title_query = pd.concat([df.title, pd.Series(query).set_axis(pd.Index([len(df)]))], axis=0) 
 df_cluster_query = pd.concat([df.cluster, pd.Series(len(df.cluster.unique())).set_axis(pd.Index([len(df)]))], axis=0)
