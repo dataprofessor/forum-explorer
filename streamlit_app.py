@@ -41,7 +41,6 @@ with st.sidebar:
 # Query
 st.markdown('#### Query')
 input_query = st.text_input('Ask a question about Streamlit')
-st.write(input_query)
 
 # Generate embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
@@ -53,7 +52,7 @@ top_k = min(k_neighbors, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
 
-if input_query is not None:
+if input_query != '':
   st.markdown('#### Results')
   st.warning(f'**Nearest neighbors for:** {input_query}', icon='📍')
 
