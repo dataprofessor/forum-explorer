@@ -2,6 +2,7 @@ import streamlit as st
 import altair as alt
 import numpy as np
 import pandas as pd
+from sentence_transformers import SentenceTransformer, util
 import torch
 
 st.title('🎈 Streamlit Forum Explorer')
@@ -72,8 +73,14 @@ tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
-
-
 st.altair_chart(tsne_plot, use_container_width=True)
 
+# Generate embeddings for query
 
+embedder = SentenceTransformer('all-MiniLM-L6-v2')
+query_embedding = embedder.encode(query, convert_to_tensor=True)
+
+# Find the highest 5 scores
+top_k = min(5, len(corpus_embeddings))
+cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
+top_results = torch.topk(cos_scores, k=top_k)
