@@ -34,6 +34,10 @@ cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
 df_cluster = load_tsne_posts_vectors_clusters()
 
+# Parameters
+with st.sidebar():
+  k_neighbors = st.slider('How many nearest neighbors?', 1, 100, 5)
+
 # Query
 st.markdown('#### Query')
 input_query = st.text_input('Ask a question about Streamlit')
@@ -43,8 +47,8 @@ embedder = SentenceTransformer('all-MiniLM-L6-v2')
 query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 corpus = list(df.title)
 
-# Find the highest 5 scores
-top_k = min(5, len(corpus_embeddings))
+# Find the top scores
+top_k = min(k_neighbors, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
 
