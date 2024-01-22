@@ -3,7 +3,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
-from sklearn.manifold import TSNE
+# from sklearn.manifold import TSNE
 from openTSNE import TSNE
 import torch
 
