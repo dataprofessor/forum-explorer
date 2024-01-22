@@ -55,7 +55,7 @@ if input_query is not None:
 
   for score, idx in zip(top_results[0], top_results[1]):
     st.write(corpus[idx], "(Score: {:.4f})".format(score))
-    st.write(df.slug[idx.item()])
+    st.write(df.slug[idx])
     # https://discuss.streamlit.io/t/{df.slug[idx]}/{df.id[idx]}
 
 ##########
