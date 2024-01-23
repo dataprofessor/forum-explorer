@@ -29,11 +29,16 @@ def load_tsne_2d_vectors():
 def load_tsne_posts_vectors_clusters():
   return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
 
+# pre-trained tSNE model
+def load_corpus_embeddings():
+  return pickle.load(open('tsne_corpus_embeddings.pkl', 'rb'))
+
 df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
 df_cluster = load_tsne_posts_vectors_clusters()
+loaded_tsne = load_corpus_embeddings()
 
 # Parameters
 with st.sidebar:
@@ -61,6 +66,8 @@ if input_query != '':
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
     st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
     
+
+
 
 ##########
 # Chart rendering
