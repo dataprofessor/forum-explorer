@@ -22,7 +22,7 @@ def load_cluster_topics():
 
 @st.cache_data
 def load_tsne_2d_vectors():
-  return np.load('data/tsne_2d_vectors.npy')
+  return np.load('data/tsne_corpus_embeddings.npy')
 
 @st.cache_data
 def load_tsne_posts_vectors_clusters():
