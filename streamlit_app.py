@@ -3,6 +3,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
+from openTSNE import TSNE
 import torch
 
 st.title('🎈 Streamlit Forum Explorer')
