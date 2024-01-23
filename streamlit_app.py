@@ -47,7 +47,7 @@ embedder = SentenceTransformer('all-MiniLM-L6-v2')
 query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 corpus = list(df.title)
 
-# Find the top scores
+# Find top scoring nearest neighbors
 top_k = min(k_neighbors, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
