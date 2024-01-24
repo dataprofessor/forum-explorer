@@ -155,8 +155,6 @@ tsne_corpus = alt.Chart(df_cluster).mark_circle(size=60).encode(
 
 if input_query != '':
   tsne_query = alt.Chart(df_query).mark_square(size=60, color='white', stroke='black').encode(
-                #x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
-                #y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 x='x:Q',
                 y='y:Q',
                 #color='cluster:N',
