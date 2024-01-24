@@ -14,7 +14,7 @@ st.title('🎈 Streamlit Forum Explorer')
 # Load data
 @st.cache_data
 def load_df():
-  return pd.read_csv('data/streamlit_forum_16Jan2024.csv')
+  return pd.read_csv('data/streamlit_forum_16Jan2024.csv', usecols=['title', 'slug', 'id'])
 
 @st.cache_data
 def load_embeddings():
@@ -25,7 +25,7 @@ def load_cluster_topics():
   return pd.read_csv('data/cluster_topics.csv', header=None)
 
 @st.cache_data
-def load_tsne_2d_vectors():
+def load_tsne_corpus_embeddings():
   return np.load('data/tsne_corpus_embeddings.npy')
 
 # Pre-trained K-means model
@@ -45,7 +45,7 @@ def load_corpus_embeddings():
 df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
-tsne_2d_vectors = load_tsne_2d_vectors()
+tsne_2d_vectors = load_tsne_corpus_embeddings()
 kmeans = load_kmeans()
 tsne_corpus_embeddings = load_corpus_embeddings()
 
