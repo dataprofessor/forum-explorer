@@ -94,9 +94,9 @@ if input_query != '':
   # Find nearest neighbors to query
   for score, idx in zip(top_results[0], top_results[1]):
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
-    if df.has_accepted_answer[idx.item()] == 'True':
+    if df.has_accepted_answer[idx.item()]=='True':
       solution = '✅'
-    else:
+    if df.has_accepted_answer[idx.item()]=='False':
       solution = '❌'
     if score >= score_threshold:
       st.write(f"- [{corpus[idx]}]({post_link})", "|", "Score: `{:.3f}`".format(score), "|", f"Solution: `{solution}`")
