@@ -16,7 +16,7 @@ st.title('🎈 Streamlit Forum Explorer')
 # About the app
 with st.expander('About this app'):
   st.markdown('**What can this app do?**')
-  st.info('This app shows collates data from the Streamlit forum and suggests related forum posts to user\'s input query.')
+  st.info("This app shows collates data from the Streamlit forum and suggests related forum posts to user's input query.")
   st.markdown('**How to use the app?**')
   st.warning('To use the app, firstly enter an input query. The app will perform processing and generate a list of relevant forum posts based on K-means nearest neighbor search.')
   
