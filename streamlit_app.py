@@ -33,10 +33,6 @@ def load_embeddings():
 def load_cluster_topics():
   return pd.read_csv('data/cluster_topics.csv', header=None)
 
-# @st.cache_data
-# def load_tsne_corpus_embeddings():
-#  return np.load('data/tsne_corpus_embeddings.npy')
-
 # Pre-trained K-means model
 @st.cache_data
 def load_kmeans():
@@ -44,7 +40,7 @@ def load_kmeans():
 
 # Pre-trained tSNE model
 @st.cache_data
-def load_corpus_embeddings():
+def load_tsne_corpus_embeddings():
   gh_url = 'https://github.com/dataprofessor/forum-explorer/raw/master/data/tsne_corpus_embeddings.sav'
   gh_content = BytesIO(requests.get(gh_url).content)
   tsne_model = joblib.load(gh_content)
@@ -54,9 +50,8 @@ def load_corpus_embeddings():
 df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
-# tsne_2d_vectors = load_tsne_corpus_embeddings()
 kmeans = load_kmeans()
-tsne_corpus_embeddings = load_corpus_embeddings()
+tsne_corpus_embeddings = load_tsne_corpus_embeddings()
 
 
 # Parameters
