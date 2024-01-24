@@ -71,6 +71,19 @@ top_k = min(k_neighbors, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
 
+x = [x for x, y in tsne_corpus_embeddings]
+y = [y for x, y in tsne_corpus_embeddings]
+  
+# DataFrame for t-SNE plot
+df['cluster'] = kmeans.labels_
+df_cluster = pd.DataFrame({
+                'title': df.title,
+                'x': x,
+                'y': y,
+                'cluster': df.cluster,
+                #'cluster_topic': [topic[x] for x in df.cluster] 
+               })
+
 # Process query
 if input_query != '':
   st.markdown('#### Results')
@@ -83,19 +96,6 @@ if input_query != '':
 
   # Apply tSNE model on query embeddings
   tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
-  x = [x for x, y in tsne_corpus_embeddings]
-  y = [y for x, y in tsne_corpus_embeddings]
-  
-  # DataFrame for t-SNE plot
-  df['cluster'] = kmeans.labels_
-  df_cluster = pd.DataFrame({
-                'title': df.title,
-                'x': x,
-                'y': y,
-                'cluster': df.cluster,
-                #'cluster_topic': [topic[x] for x in df.cluster] 
-               })
-
 
 
 ##########
