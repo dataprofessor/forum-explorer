@@ -33,9 +33,9 @@ def load_embeddings():
 def load_cluster_topics():
   return pd.read_csv('data/cluster_topics.csv', header=None)
 
-@st.cache_data
-def load_tsne_corpus_embeddings():
-  return np.load('data/tsne_corpus_embeddings.npy')
+# @st.cache_data
+# def load_tsne_corpus_embeddings():
+#  return np.load('data/tsne_corpus_embeddings.npy')
 
 # Pre-trained K-means model
 @st.cache_data
@@ -54,7 +54,7 @@ def load_corpus_embeddings():
 df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
-tsne_2d_vectors = load_tsne_corpus_embeddings()
+# tsne_2d_vectors = load_tsne_corpus_embeddings()
 kmeans = load_kmeans()
 tsne_corpus_embeddings = load_corpus_embeddings()
 
