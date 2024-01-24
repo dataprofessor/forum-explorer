@@ -102,7 +102,7 @@ if input_query != '':
                 'title': input_query,
                 'x': x_query,
                 'y': y_query,
-                'cluster': 99,
+                'cluster': None,
                })
 
 ##########
