@@ -149,7 +149,7 @@ tsne_query = alt.Chart(df_query).mark_square(size=60, color='white').encode(
                 x='x:Q',
                 y='y:Q',
                 #color='cluster:N',
-                #opacity=alt.value(0.3),
+                opacity=alt.value(1.0),
                 tooltip=['title', 'cluster']
             )
 
