@@ -57,7 +57,7 @@ tsne_corpus_embeddings = load_corpus_embeddings()
 with st.sidebar:
   st.header('⚙️ Settings')
   k_neighbors = st.slider('How many nearest neighbors?', 1, 100, 5)
-  score_threshold = st.slider('Score threshold', 0.1, 1, 0.8)
+  score_threshold = st.slider('Score threshold', 0.1, 1.0, 0.8)
 
 # Query
 st.markdown('#### Query')
