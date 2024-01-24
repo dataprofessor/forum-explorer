@@ -100,8 +100,8 @@ if input_query != '':
   y_query = [y_query for x_query, y_query in tsne_query_embedding]
   df_query = pd.DataFrame({
                 'title': input_query,
-                'x': x,
-                'y': y,
+                'x': x_query,
+                'y': y_query,
                 'cluster': 99,
                })
 
