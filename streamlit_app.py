@@ -28,9 +28,9 @@ def load_cluster_topics():
 def load_tsne_2d_vectors():
   return np.load('data/tsne_corpus_embeddings.npy')
 
-@st.cache_data
-def load_tsne_posts_vectors_clusters():
-  return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
+#@st.cache_data
+#def load_tsne_posts_vectors_clusters():
+#  return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
 
 # pre-trained tSNE model
 def load_corpus_embeddings():
@@ -44,7 +44,7 @@ df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
-df_cluster = load_tsne_posts_vectors_clusters()
+#df_cluster = load_tsne_posts_vectors_clusters()
 loaded_tsne = load_corpus_embeddings()
 
 # Parameters
@@ -72,7 +72,16 @@ if input_query != '':
   for score, idx in zip(top_results[0], top_results[1]):
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
     st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
-    
+
+
+# DataFrame for t-SNE plot
+df_cluster = pd.DataFrame({
+              'title': df.title,
+              'x': x,
+              'y': y,
+              'cluster': df.cluster,
+              #'cluster_topic': [topic[x] for x in df.cluster] 
+             })
 
 
 
