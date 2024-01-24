@@ -34,7 +34,7 @@ def load_tsne_2d_vectors():
 
 # Pre-trained K-means model
 def load_kmeans():
-  return joblib.load('kmeans_model.sav')
+  return joblib.load('data/kmeans_model.sav')
 
 # Pre-trained tSNE model
 def load_corpus_embeddings():
