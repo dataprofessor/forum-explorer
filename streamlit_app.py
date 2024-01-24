@@ -31,7 +31,7 @@ def load_tsne_posts_vectors_clusters():
 
 # pre-trained tSNE model
 def load_corpus_embeddings():
-  return pickle.load(open('tsne_corpus_embeddings.pkl', 'rb'))
+  return pickle.load(open('data/tsne_corpus_embeddings.pkl', 'rb'))
 
 df = load_df()
 corpus_embeddings = load_embeddings()
