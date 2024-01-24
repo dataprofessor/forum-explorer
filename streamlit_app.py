@@ -146,7 +146,8 @@ tsne_corpus = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
-tsne_query = alt.Chart(df_query).mark_square(size=60, color='white', stroke='black').encode(
+if input_query != '':
+  tsne_query = alt.Chart(df_query).mark_square(size=60, color='white', stroke='black').encode(
                 #x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 #y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 x='x:Q',
@@ -155,8 +156,6 @@ tsne_query = alt.Chart(df_query).mark_square(size=60, color='white', stroke='bla
                 opacity=alt.value(1.0),
                 tooltip=['title', 'cluster']
             )
-
-if input_query != '':
   st.altair_chart(alt.layer(tsne_corpus, tsne_query), use_container_width=True)
 else:
   st.altair_chart(tsne_corpus, use_container_width=True)
