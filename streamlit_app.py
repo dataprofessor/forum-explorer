@@ -57,7 +57,7 @@ tsne_corpus_embeddings = load_corpus_embeddings()
 with st.sidebar:
   st.header('⚙️ Settings')
   k_neighbors = st.slider('How many nearest neighbors?', 1, 100, 5)
-  score_threshold = st.slider('Score threshold', 0.1, 1.0, 0.8)
+  score_threshold = st.slider('Score threshold', 0.1, 1.0, 0.7)
 
 # Query
 st.markdown('#### Query')
@@ -88,7 +88,8 @@ df_cluster = pd.DataFrame({
 # Process query
 if input_query != '':
   st.markdown('#### Results')
-  st.warning(f'**{k_neighbors} Nearest neighbors for:** {input_query}', icon='📍')
+  # st.warning(f'**{k_neighbors} Nearest neighbors for:** {input_query}', icon='📍')
+  st.warning(f'**Nearest neighbors for:** {input_query}', icon='📍')
 
   # Find nearest neighbors to query
   for score, idx in zip(top_results[0], top_results[1]):
