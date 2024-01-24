@@ -55,6 +55,7 @@ tsne_corpus_embeddings = load_corpus_embeddings()
 
 # Parameters
 with st.sidebar:
+  st.header('⚙️ Settings')
   k_neighbors = st.slider('How many nearest neighbors?', 1, 100, 5)
 
 # Query
