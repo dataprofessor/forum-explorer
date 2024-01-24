@@ -81,7 +81,6 @@ df_cluster = pd.DataFrame({
                 'x': x,
                 'y': y,
                 'cluster': df.cluster,
-                #'cluster_topic': [topic[x] for x in df.cluster] 
                })
 
 # Process query
@@ -97,6 +96,14 @@ if input_query != '':
   # Apply tSNE model on query embeddings
   tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
 
+  x_query = [x_query for x_query, y_query in tsne_query_embedding]
+  y_query = [y_query for x_query, y_query in tsne_query_embedding]
+  df_query = pd.DataFrame({
+                'title': input_query,
+                'x': x,
+                'y': y,
+                'cluster': 99,
+               })
 
 ##########
 # Chart rendering
@@ -126,7 +133,17 @@ def my_theme():
 alt.themes.register('my_theme', my_theme)
 alt.themes.enable('my_theme')
 
-tsne_plot = alt.Chart(df_cluster).mark_circle(size=60).encode(
+tsne_corpus = alt.Chart(df_cluster).mark_circle(size=60).encode(
+                x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
+                y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
+                # x='x:Q',
+                # y='y:Q',
+                color='cluster:N',
+                opacity=alt.value(0.3),
+                tooltip=['title', 'cluster']
+            )
+
+tsne_query = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 # x='x:Q',
