@@ -57,6 +57,7 @@ tsne_corpus_embeddings = load_corpus_embeddings()
 with st.sidebar:
   st.header('⚙️ Settings')
   k_neighbors = st.slider('How many nearest neighbors?', 1, 100, 5)
+  score_threshold = st.slider('Score threshold', 0.1, 1, 0.8)
 
 # Query
 st.markdown('#### Query')
@@ -92,7 +93,8 @@ if input_query != '':
   # Find nearest neighbors to query
   for score, idx in zip(top_results[0], top_results[1]):
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
-    st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
+    if score >= score_threshold:
+      st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
 
   # Apply tSNE model on query embeddings
   tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
