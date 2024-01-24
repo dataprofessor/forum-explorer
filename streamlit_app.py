@@ -32,7 +32,11 @@ def load_tsne_2d_vectors():
 #def load_tsne_posts_vectors_clusters():
 #  return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
 
-# pre-trained tSNE model
+# Pre-trained K-means model
+def load_kmeans():
+  return joblib.load('kmeans_model.sav')
+
+# Pre-trained tSNE model
 def load_corpus_embeddings():
   gh_url = 'https://github.com/dataprofessor/forum-explorer/raw/master/data/tsne_corpus_embeddings.sav'
   gh_content = BytesIO(requests.get(gh_url).content)
@@ -45,7 +49,9 @@ corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
 #df_cluster = load_tsne_posts_vectors_clusters()
-loaded_tsne = load_corpus_embeddings()
+kmeans = load_kmeans()
+tsne_corpus_embeddings = load_corpus_embeddings()
+
 
 # Parameters
 with st.sidebar:
@@ -55,9 +61,8 @@ with st.sidebar:
 st.markdown('#### Query')
 input_query = st.text_input('Ask a question about Streamlit', placeholder='Enter your question here ...')
 
-# Generate embeddings for query
+# Initialize embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
-query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 corpus = list(df.title)
 
 # Find top scoring nearest neighbors
@@ -65,23 +70,31 @@ top_k = min(k_neighbors, len(corpus_embeddings))
 cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
 top_results = torch.topk(cos_scores, k=top_k)
 
+# Process query
 if input_query != '':
   st.markdown('#### Results')
   st.warning(f'**{k_neighbors} Nearest neighbors for:** {input_query}', icon='📍')
 
+  # Find nearest neighbors to query
   for score, idx in zip(top_results[0], top_results[1]):
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
     st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
 
-
-# DataFrame for t-SNE plot
-df_cluster = pd.DataFrame({
-              'title': df.title,
-              'x': x,
-              'y': y,
-              'cluster': df.cluster,
-              #'cluster_topic': [topic[x] for x in df.cluster] 
-             })
+  # Generate embeddings for query
+  query_embedding = embedder.encode(input_query, convert_to_tensor=True)
+  tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
+  x = [x for x, y in tsne_corpus_embeddings]
+  y = [y for x, y in tsne_corpus_embeddings]
+  
+  # DataFrame for t-SNE plot
+  df['cluster'] = kmeans.labels_
+  df_cluster = pd.DataFrame({
+                'title': df.title,
+                'x': x,
+                'y': y,
+                'cluster': df.cluster,
+                #'cluster_topic': [topic[x] for x in df.cluster] 
+               })
 
 
 
