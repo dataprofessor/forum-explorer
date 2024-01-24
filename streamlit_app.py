@@ -63,6 +63,7 @@ input_query = st.text_input('Ask a question about Streamlit', placeholder='Enter
 
 # Initialize embeddings for query
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
+query_embedding = embedder.encode(input_query, convert_to_tensor=True)
 corpus = list(df.title)
 
 # Find top scoring nearest neighbors
@@ -80,8 +81,7 @@ if input_query != '':
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
     st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
 
-  # Generate embeddings for query
-  query_embedding = embedder.encode(input_query, convert_to_tensor=True)
+  # Apply tSNE model on query embeddings
   tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
   x = [x for x, y in tsne_corpus_embeddings]
   y = [y for x, y in tsne_corpus_embeddings]
