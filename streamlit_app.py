@@ -97,7 +97,7 @@ if input_query != '':
 
     if score >= score_threshold:
       solution = df.has_accepted_answer[idx.item()]
-      st.write(f"- [{corpus[idx]}]({post_link})", "|", "Score: `{:.3f}`".format(score), "|", f"Solution: `{solution}`")
+      st.write(f"- [**{corpus[idx]}**]({post_link})", "|", "Score: `{:.3f}`".format(score), "|", f"Solution: `{solution}`")
 
   # Apply tSNE model on query embeddings
   tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
