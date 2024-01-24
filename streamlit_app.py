@@ -153,4 +153,4 @@ tsne_query = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
-st.altair_chart(tsne_plot, use_container_width=True)
+st.altair_chart(alt.layer(tsne_corpus, tsne_query), use_container_width=True)
