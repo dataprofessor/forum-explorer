@@ -93,8 +93,8 @@ if input_query != '':
   # Find nearest neighbors to query
   for score, idx in zip(top_results[0], top_results[1]):
     post_link = f"https://discuss.streamlit.io/t/{df.slug[idx.item()]}/{df.id[idx.item()]}"
-  if score >= score_threshold:
-    st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
+  #if score >= score_threshold:
+  st.write(f"- [{corpus[idx]}]({post_link})", "`(Score: {:.3f})`".format(score))
 
   # Apply tSNE model on query embeddings
   tsne_query_embedding = tsne_corpus_embeddings.transform(query_embedding.unsqueeze(0))
