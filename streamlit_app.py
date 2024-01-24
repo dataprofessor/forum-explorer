@@ -1,9 +1,10 @@
 import streamlit as st
 import altair as alt
 import numpy as np
-import pandas as pd
-from sentence_transformers import SentenceTransformer, util
 from openTSNE import TSNE
+import pandas as pd
+import pickle
+from sentence_transformers import SentenceTransformer, util
 import torch
 
 st.title('🎈 Streamlit Forum Explorer')
