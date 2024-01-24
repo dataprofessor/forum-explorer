@@ -1,9 +1,9 @@
 import streamlit as st
 import altair as alt
+import joblib
 import numpy as np
 from openTSNE import TSNE
 import pandas as pd
-import pickle
 from sentence_transformers import SentenceTransformer, util
 import torch
 
@@ -32,7 +32,7 @@ def load_tsne_posts_vectors_clusters():
 
 # pre-trained tSNE model
 def load_corpus_embeddings():
-  return pickle.load(open('data/tsne_corpus_embeddings.pkl', 'rb'))
+  return joblib.load('data/tsne_corpus_embeddings.sav')
 
 df = load_df()
 corpus_embeddings = load_embeddings()
