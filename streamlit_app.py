@@ -156,4 +156,8 @@ tsne_query = alt.Chart(df_query).mark_square(size=60, color='white', stroke='bla
                 tooltip=['title', 'cluster']
             )
 
-st.altair_chart(alt.layer(tsne_corpus, tsne_query), use_container_width=True)
+if input_query != '':
+  st.altair_chart(alt.layer(tsne_corpus, tsne_query), use_container_width=True)
+else:
+  st.altair_chart(tsne_corpus, use_container_width=True)
+
