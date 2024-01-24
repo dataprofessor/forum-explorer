@@ -32,7 +32,11 @@ def load_tsne_posts_vectors_clusters():
 
 # pre-trained tSNE model
 def load_corpus_embeddings():
-  return joblib.load('data/tsne_corpus_embeddings.sav')
+  gh_url = 'https://github.com/dataprofessor/forum-explorer/raw/master/data/tsne_corpus_embeddings.sav'
+  gh_content = BytesIO(requests.get(gh_url).content)
+  tsne_model = joblib.load(gh_content)
+  return tsne_model
+  #return joblib.load('data/tsne_corpus_embeddings.sav')
 
 df = load_df()
 corpus_embeddings = load_embeddings()
