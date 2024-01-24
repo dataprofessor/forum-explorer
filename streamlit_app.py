@@ -46,7 +46,6 @@ df = load_df()
 corpus_embeddings = load_embeddings()
 cluster_topics = load_cluster_topics()
 tsne_2d_vectors = load_tsne_2d_vectors()
-#df_cluster = load_tsne_posts_vectors_clusters()
 kmeans = load_kmeans()
 tsne_corpus_embeddings = load_corpus_embeddings()
 
