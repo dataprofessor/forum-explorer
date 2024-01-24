@@ -28,15 +28,13 @@ def load_cluster_topics():
 def load_tsne_2d_vectors():
   return np.load('data/tsne_corpus_embeddings.npy')
 
-#@st.cache_data
-#def load_tsne_posts_vectors_clusters():
-#  return pd.read_csv('data/tsne_posts_vectors_clusters.csv')
-
 # Pre-trained K-means model
+@st.cache_data
 def load_kmeans():
   return joblib.load('data/kmeans_model.sav')
 
 # Pre-trained tSNE model
+@st.cache_data
 def load_corpus_embeddings():
   gh_url = 'https://github.com/dataprofessor/forum-explorer/raw/master/data/tsne_corpus_embeddings.sav'
   gh_content = BytesIO(requests.get(gh_url).content)
@@ -76,7 +74,7 @@ top_results = torch.topk(cos_scores, k=top_k)
 x = [x for x, y in tsne_corpus_embeddings]
 y = [y for x, y in tsne_corpus_embeddings]
   
-# DataFrame for t-SNE plot
+# DataFrame for tSNE plot of corpus embeddings
 df['cluster'] = kmeans.labels_
 df_cluster = pd.DataFrame({
                 'title': df.title,
@@ -108,6 +106,8 @@ if input_query != '':
 
   x_query = [x_query for x_query, y_query in tsne_query_embedding]
   y_query = [y_query for x_query, y_query in tsne_query_embedding]
+
+  # DataFrame for tSNE plot of query embedding
   df_query = pd.DataFrame({
                 'title': input_query,
                 'x': x_query,
@@ -115,7 +115,6 @@ if input_query != '':
                 'cluster': None,
                })
 
-##########
 # Chart rendering
 st.markdown('#### Topic clusters')
 alt.data_transformers.disable_max_rows()
@@ -133,6 +132,7 @@ colors = [
   '#bad80a' # lime
 ]
 
+# Custom color theme
 def my_theme():
   return {
     'config': {
@@ -143,6 +143,7 @@ def my_theme():
 alt.themes.register('my_theme', my_theme)
 alt.themes.enable('my_theme')
 
+# Render tSNE plot of corpus embeddings
 tsne_corpus = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 x=alt.X('x:Q', axis=alt.Axis(title='Dimension 1', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
                 y=alt.Y('y:Q', axis=alt.Axis(title='Dimension 2', titlePadding=12, titleFontSize=16, titleFontWeight=900)),
@@ -153,6 +154,7 @@ tsne_corpus = alt.Chart(df_cluster).mark_circle(size=60).encode(
                 tooltip=['title', 'cluster']
             )
 
+# Display tSNE plot of corpus and query embeddings
 if input_query != '':
   tsne_query = alt.Chart(df_query).mark_square(size=60, color='white', stroke='black').encode(
                 x='x:Q',
@@ -162,6 +164,7 @@ if input_query != '':
                 tooltip=['title', 'cluster']
             )
   st.altair_chart(alt.layer(tsne_corpus, tsne_query), use_container_width=True)
+
+# Display tSNE plot of query embedding
 else:
   st.altair_chart(tsne_corpus, use_container_width=True)
-
