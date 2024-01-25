@@ -187,4 +187,4 @@ del kmeans
 del tsne_corpus_embeddings
 gc.collect()
 
-st.write(get_memory_usage())
+print(get_memory_usage())
