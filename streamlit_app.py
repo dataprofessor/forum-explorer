@@ -6,6 +6,7 @@ import joblib
 import numpy as np
 from openTSNE import TSNE
 import pandas as pd
+import psutil
 import requests
 from sentence_transformers import SentenceTransformer, util
 import torch
