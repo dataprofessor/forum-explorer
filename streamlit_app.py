@@ -1,5 +1,6 @@
 import streamlit as st
 import altair as alt
+import gc
 from io import BytesIO
 import joblib
 import numpy as np
@@ -172,5 +173,11 @@ if input_query != '':
 else:
   st.altair_chart(tsne_corpus, use_container_width=True)
 
-import gc
+
+# Delete unused variables
+del df
+del corpus_embeddings
+del cluster_topics
+del kmeans
+del tsne_corpus_embeddings
 gc.collect()
