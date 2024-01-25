@@ -54,6 +54,10 @@ cluster_topics = load_cluster_topics()
 kmeans = load_kmeans()
 tsne_corpus_embeddings = load_tsne_corpus_embeddings()
 
+# Get memory usage
+def get_memory_usage():
+    memory = psutil.virtual_memory()
+    return memory.percent
 
 # Parameters
 with st.sidebar:
@@ -181,3 +185,5 @@ del cluster_topics
 del kmeans
 del tsne_corpus_embeddings
 gc.collect()
+
+st.write(get_memory_usage())
