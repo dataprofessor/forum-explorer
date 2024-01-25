@@ -171,3 +171,6 @@ if input_query != '':
 # Display tSNE plot of query embedding
 else:
   st.altair_chart(tsne_corpus, use_container_width=True)
+
+import gc
+gc.collect()
