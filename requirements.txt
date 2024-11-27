@@ -7,3 +7,4 @@ scikit-learn==1.2.2
 openTSNE==1.0.1
 psutil==5.9.8
 sentence-transformers==2.2.2
+huggingface-hub==0.25.2
